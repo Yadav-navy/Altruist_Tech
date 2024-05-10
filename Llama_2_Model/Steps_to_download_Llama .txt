@@ -1,0 +1,39 @@
+Installation of LlaMA 2
+Downloaded through Hugging Face
+
+1.	First visit meta website for Llama 2 model request access (https://llama.meta.com/llama-downloads/) and fill the credentials.
+2.	Then visit Hugging Face Website and sign up.
+3.	After that search for the model you want to download in your system ( in my case it is “meta-llama/Llama-2-7b-chat-hf”) (https://huggingface.co/meta-llama/Llama-2-7b-chat-hf)
+4.	We have to fill the credentials for authentication in that page itself.
+5.	After some time we will receive an email from Hugging face that Access Granted.
+6.	After that we have to generate the access token by going to profile page in Hugging face website.
+7.	All the above authentication steps are need to done once, after that we can download any Llama model.
+8.	After that open jupyter notebook or any other python compiler.
+9.	Run the code
+
+	import torch
+	import torch.nn as nn
+	import accelerate
+
+	from transformers import AutoTokenizer, AutoConfig, AutoModelForCausalLM
+
+	device = torch.device('cuda' if torch.cuda.is_available() else "cpu")
+
+	model = AutoModelForCausalLM.from_pretrained("meta-llama/Llama-2-7b-chat-hf",device_map='auto',use_auth_token=‘XXXXX’)
+
+	tokenizer = AutoTokenizer.from_pretrained("meta-llama/Llama-2-7b-chat-hf",use_auth_token=‘XXXXX’)
+
+	# we have to pass the access token in “user_auth_token”
+	# and we can specify directory where we want our model needs to be downloaded. (cache_dir=“path where we want to save”)
+	# or else it will be  downloaded in  default directory. 
+
+10 . After running the code model will start downloading on system, Once downloaded then we can use that model. 
+
+	Code:
+	def get_llama2_reponse(prompt, max_new_tokens=50):
+    		inputs = tokenizer(prompt, return_tensors="pt").to(device)
+    		outputs = model.generate(**inputs, max_new_tokens=max_new_tokens, temperature= 0.00001)
+    		response = tokenizer.decode(outputs[0], skip_special_tokens=True)
+    		return response
+	# we have to give prompt and maximum number of tokens.
+	# Based on maximum number of token given, output will be generated.

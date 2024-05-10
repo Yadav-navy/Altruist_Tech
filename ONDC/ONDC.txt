@@ -1,0 +1,40 @@
+
+
+
+[root@oxfordcaps ~]# cd ONDC
+[root@oxfordcaps ONDC]# python3 ONDC_1.py generate_key_pairs
+Signing_private_key:   rOjgoShzsiLL6RO0kFOOtEqlXTaUcRDx0SEHL/azGqmJhNEzV2jM8KLmWIAO8FhhTT2pSFLFl4uLU0bMWmxh8Q==
+Signing_public_key:    iYTRM1dozPCi5liADvBYYU09qUhSxZeLi1NGzFpsYfE=
+Encryption_Privatekey: MC4CAQAwBQYDK2VuBCIEINCrnMueBDi1frs3cF2CLL+NHsRNFO4vf8utAQ9g7v9N
+Encryption_Publickey:  MCowBQYDK2VuAyEAxeUnl+secrCVfu+V9J1lvo4/JzK+m0LmqgdT6AisdUQ=
+
+
+[root@oxfordcaps ONDC]# export PRIVATE_KEY=rOjgoShzsiLL6RO0kFOOtEqlXTaUcRDx0SEHL/azGqmJhNEzV2jM8KLmWIAO8FhhTT2pSFLFl4uLU0bMWmxh8Q==
+[root@oxfordcaps ONDC]# export PUBLIC_KEY=iYTRM1dozPCi5liADvBYYU09qUhSxZeLi1NGzFpsYfE=
+[root@oxfordcaps ONDC]# export ENCRYPTION_PRIVATE_KEY=MC4CAQAwBQYDK2VuBCIEINCrnMueBDi1frs3cF2CLL+NHsRNFO4vf8utAQ9g7v9N
+[root@oxfordcaps ONDC]# export ENCRYPTION_PUBLIC_KEY=MCowBQYDK2VuAyEAxeUnl+secrCVfu+V9J1lvo4/JzK+m0LmqgdT6AisdUQ=
+
+
+[root@oxfordcaps ONDC]#
+[root@oxfordcaps ONDC]#
+[root@oxfordcaps ONDC]# python3 ONDC_1.py create_authorisation_header
+"Signature keyId="buyer-app.ondc.org|207|ed25519",algorithm="ed25519",created="1708585641",expires="1708589241",headers="(created) (expires) digest",signature="IyMKtTSI/HB0seVnFnY+SWUPkhIVYeXahloXC38BRrb8wLIar9HLuMT33HNoWkCfEYCAdnr1odd8mcV31SmdDw==""
+
+
+[root@oxfordcaps ONDC]#
+[root@oxfordcaps ONDC]#
+[root@oxfordcaps ONDC]# python3 ONDC_1.py verify_authorisation_header '"Signature keyId="buyer-app.ondc.org|207|ed25519",algorithm="ed25519",created="1708585641",expires="1708589241",headers="(created) (expires) digest",signature="IyMKtTSI/HB0seVnFnY+SWUPkhIVYeXahloXC38BRrb8wLIar9HLuMT33HNoWkCfEYCAdnr1odd8mcV31SmdDw==""'
+True
+
+
+[root@oxfordcaps ONDC]#
+[root@oxfordcaps ONDC]#
+[root@oxfordcaps ONDC]# python3 ONDC_1.py encrypt "MC4CAQAwBQYDK2VuBCIEINCrnMueBDi1frs3cF2CLL+NHsRNFO4vf8utAQ9g7v9N" "MCowBQYDK2VuAyEAxeUnl+secrCVfu+V9J1lvo4/JzK+m0LmqgdT6AisdUQ=" NULL
+5fDAp6LdqySBWTIirlORlTIlJVCSe9IYWTuix2qoeZQ=
+
+
+[root@oxfordcaps ONDC]#
+[root@oxfordcaps ONDC]#
+[root@oxfordcaps ONDC]# python3  ONDC_1.py decrypt "MC4CAQAwBQYDK2VuBCIEINCrnMueBDi1frs3cF2CLL+NHsRNFO4vf8utAQ9g7v9N" "MCowBQYDK2VuAyEAxeUnl+secrCVfu+V9J1lvo4/JzK+m0LmqgdT6AisdUQ=" "5fDAp6LdqySBWTIirlORlTIlJVCSe9IYWTuix2qoeZQ="
+ONDC is a Great Initiative!!
+[root@oxfordcaps ONDC]#
